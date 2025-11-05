@@ -53,7 +53,6 @@ internal class AndroidApplicationConventionPlugin : Plugin<Project> {
 
             dependencies {
                 implementation(project(":data"))
-                implementation(project(":designSystem"))
                 implementation(project(":domain"))
             }
         }

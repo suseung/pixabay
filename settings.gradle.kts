@@ -22,7 +22,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "tvingAssignment"
 include(":app")
-include(":presentation")
 include(":data")
-include(":designSystem")
 include(":domain")
+include(":presentation:home")
+include(":presentation:common")
