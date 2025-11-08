@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.tving.android.library)
     alias(libs.plugins.tving.android.hilt)
@@ -6,6 +8,15 @@ plugins {
 
 android {
     namespace = "com.tving.data"
+
+    defaultConfig.apply {
+        val apiKey = gradleLocalProperties(projectRootDir = rootDir, providers = providers).getProperty("api.key")
+        buildConfigField("String", "apiKey", apiKey)
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
