@@ -52,6 +52,9 @@ internal class AndroidApplicationConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
+                implementation(project(":presentation:common"))
+                implementation(project(":presentation:home"))
+                implementation(project(":designsystem"))
                 implementation(project(":data"))
                 implementation(project(":domain"))
             }
