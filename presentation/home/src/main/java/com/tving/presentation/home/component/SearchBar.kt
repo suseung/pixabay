@@ -52,7 +52,7 @@ fun SearchBar(
             onValueChange = { onInputChange(it) },
             leadingIcon = {
                 Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.ic_arrow_back),
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_search),
                     tint = Color.Unspecified,
                     contentDescription = "search button"
                 )

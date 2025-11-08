@@ -3,6 +3,8 @@ package com.tving.presentation.home
 import com.tving.presentation.common.base.ViewEffect
 import com.tving.presentation.common.base.ViewIntent
 import com.tving.presentation.common.base.ViewState
+import com.tving.presentation.model.ImageInfoUiModel
+import com.tving.presentation.model.VideoInfoUiModel
 
 sealed interface HomeIntent: ViewIntent {
 
@@ -16,7 +18,9 @@ sealed interface HomeState: ViewState {
 
     data class Success(
         val input: String = "",
-        val videoUri: String = ""
+        val videoUri: String = "",
+        val videoInfo: VideoInfoUiModel = VideoInfoUiModel(),
+        val images: List<ImageInfoUiModel> = emptyList()
     ): HomeState
 }
 

@@ -12,7 +12,7 @@ internal data class ImageInfoResponse(
 @Serializable
 internal data class ImageHitResponse(
     @SerialName("type") val type: String,
-    @SerialName("previewURL") val imagUrl: String,
+    @SerialName("webformatURL") val imagUrl: String,
     @SerialName("views") val views: Int,
     @SerialName("downloads") val downloads: Int,
     @SerialName("likes") val likes: Int,

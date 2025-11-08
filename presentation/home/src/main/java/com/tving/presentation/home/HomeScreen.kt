@@ -1,11 +1,16 @@
 package com.tving.presentation.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,8 +27,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tving.designsystem.component.TvingScaffold
 import com.tving.presentation.common.component.CommonBottomBar
+import com.tving.presentation.home.component.ImageCard
 import com.tving.presentation.home.component.VideoPlayer
 import com.tving.presentation.home.component.SearchBar
+import com.tving.presentation.model.ImageInfoUiModel
+import com.tving.presentation.model.VideoInfoUiModel
 
 @Composable
 fun HomeScreen(
@@ -47,7 +55,8 @@ fun HomeScreen(
             HomeContent(
                 modifier = Modifier.padding(paddingValues),
                 input = it.input,
-                videoUri = it.videoUri,
+                videoInfo = it.videoInfo,
+                imageInfos = it.images,
                 action = action
             )
         }
@@ -59,13 +68,15 @@ fun HomeScreen(
 fun HomeContent(
     modifier: Modifier = Modifier,
     input: String,
-    videoUri: String,
+    videoInfo: VideoInfoUiModel,
+    imageInfos: List<ImageInfoUiModel>,
     action: (HomeIntent) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
+        verticalArrangement = Arrangement.Top,
+        contentPadding = PaddingValues(vertical = 20.dp)
     ) {
         item {
             SearchBar(
@@ -91,14 +102,34 @@ fun HomeContent(
                 )
             }
         } else {
-            if (videoUri.isNotEmpty()) {
+            if (videoInfo.url.isNotEmpty()) {
                 item {
                     VideoPlayer(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(300.dp),
-                        videoUri = videoUri
+                        videoUri = videoInfo.url
                     )
+                }
+            }
+            if (imageInfos.isNotEmpty()) {
+                items(imageInfos.chunked(2)) { rowItems ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        for (item in rowItems) {
+                            ImageCard(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .aspectRatio(1f),
+                                imageInfo = item
+                            )
+                        }
+                        if (rowItems.size == 1) {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+                    }
                 }
             }
         }

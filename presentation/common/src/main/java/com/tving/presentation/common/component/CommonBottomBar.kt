@@ -39,7 +39,7 @@ fun CommonBottomBar(
             ) {
                 IconButton(onClick = onNavigateToHome) {
                     Icon(
-                        imageVector = ImageVector.vectorResource(com.tving.designsystem.R.drawable.ic_arrow_back),
+                        imageVector = ImageVector.vectorResource(com.tving.designsystem.R.drawable.ic_home),
                         tint = Color.Unspecified,
                         contentDescription = "home button"
                     )

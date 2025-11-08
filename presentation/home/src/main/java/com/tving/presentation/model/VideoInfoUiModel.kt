@@ -4,12 +4,13 @@ import com.tving.domain.model.VideoInfoEntity
 import com.tving.presentation.common.model.UiModel
 
 data class VideoInfoUiModel(
-    val url: String,
-    val type: String,
-    val views: Int,
-    val downloads: Int,
-    val likes: Int,
-    val tags: List<String>
+    val url: String = "",
+    val type: String = "",
+    val views: Int = 0,
+    val downloads: Int = 0,
+    val likes: Int = 0,
+    val tags: List<String> = emptyList(),
+    val isLike: Boolean = false
 ): UiModel
 
 fun VideoInfoEntity.toUiModel(): VideoInfoUiModel {

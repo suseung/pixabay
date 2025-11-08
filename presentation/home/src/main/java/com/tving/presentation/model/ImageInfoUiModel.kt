@@ -9,8 +9,8 @@ data class ImageInfoUiModel(
     val views: Int = 0,
     val likes: Int = 0,
     val downloads: Int = 0,
-    val isLike: Boolean = false,
-    val tags: List<String> = emptyList()
+    val tags: List<String> = emptyList(),
+    val isLike: Boolean = false
 ) {
     val tagsToString: String
         get() = tags.joinToString(" • ")
