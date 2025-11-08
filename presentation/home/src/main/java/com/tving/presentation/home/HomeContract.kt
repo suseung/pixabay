@@ -15,7 +15,8 @@ sealed interface HomeState: ViewState {
     object Loading: HomeState
 
     data class Success(
-        val input: String = ""
+        val input: String = "",
+        val videoUri: String = ""
     ): HomeState
 }
 

@@ -1,4 +1,4 @@
-package com.tving.presentation.home
+package com.tving.presentation.home.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.tving.designsystem.R
 import com.tving.presentation.common.utils.ThemePreview
 
 @Composable
@@ -51,7 +52,7 @@ fun SearchBar(
             onValueChange = { onInputChange(it) },
             leadingIcon = {
                 Icon(
-                    imageVector = ImageVector.vectorResource(com.tving.designsystem.R.drawable.ic_arrow_back),
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_arrow_back),
                     tint = Color.Unspecified,
                     contentDescription = "search button"
                 )
@@ -74,7 +75,7 @@ fun SearchBar(
                 onClick = onClickClear
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(com.tving.designsystem.R.drawable.ic_erase),
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_erase),
                     tint = Color.Unspecified,
                     contentDescription = "erase button"
                 )

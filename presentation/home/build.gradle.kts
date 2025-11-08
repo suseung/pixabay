@@ -6,3 +6,7 @@ plugins {
 android {
     namespace = "com.tving.presentation.home"
 }
+
+dependencies {
+    implementation(libs.bundles.exoplayer)
+}

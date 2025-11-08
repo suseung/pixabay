@@ -1,6 +1,8 @@
 package com.tving.presentation.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,6 +22,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tving.designsystem.component.TvingScaffold
 import com.tving.presentation.common.component.CommonBottomBar
+import com.tving.presentation.home.component.VideoPlayer
+import com.tving.presentation.home.component.SearchBar
 
 @Composable
 fun HomeScreen(
@@ -38,11 +42,12 @@ fun HomeScreen(
                 onNavigateToFavorite = onNavigateToFavorite
             )
         }
-    ) {  paddingValues ->
+    ) { paddingValues ->
         (uiState as? HomeState.Success)?.let {
             HomeContent(
                 modifier = Modifier.padding(paddingValues),
                 input = it.input,
+                videoUri = it.videoUri,
                 action = action
             )
         }
@@ -54,6 +59,7 @@ fun HomeScreen(
 fun HomeContent(
     modifier: Modifier = Modifier,
     input: String,
+    videoUri: String,
     action: (HomeIntent) -> Unit = {}
 ) {
     LazyColumn(
@@ -83,6 +89,17 @@ fun HomeContent(
                     modifier = Modifier.padding(top = 20.dp),
                     text = "Search for video and images"
                 )
+            }
+        } else {
+            if (videoUri.isNotEmpty()) {
+                item {
+                    VideoPlayer(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp),
+                        videoUri = videoUri
+                    )
+                }
             }
         }
     }
