@@ -1,5 +1,7 @@
 package com.tving.presentation.model
 
+import com.tving.domain.model.ImageInfoEntity
+
 data class ImageInfoUiModel(
     val imageUrl: String = "",
     val title: String = "",
@@ -12,6 +14,17 @@ data class ImageInfoUiModel(
 ) {
     val tagsToString: String
         get() = tags.joinToString(" • ")
+}
+
+fun ImageInfoEntity.toUiModel(): ImageInfoUiModel {
+    return ImageInfoUiModel(
+        imageUrl = url,
+        type = type,
+        views = views,
+        downloads = downloads,
+        likes = likes,
+        tags = tags.split(",").map { it.trim() }
+    )
 }
 
 val DEFAULT_IMAGE_INFO = ImageInfoUiModel(

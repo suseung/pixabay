@@ -4,6 +4,8 @@ import com.tving.data.model.toDomain
 import com.tving.data.remote.VideoRemoteDataSource
 import com.tving.data.service.VideoApi
 import com.tving.domain.model.VideoInfoEntity
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import javax.inject.Inject
 
 internal class VideoRemoteDataSourceImpl @Inject constructor(
@@ -11,6 +13,7 @@ internal class VideoRemoteDataSourceImpl @Inject constructor(
 ): VideoRemoteDataSource {
 
     override suspend fun getVideoInfoByKeyword(keyword: String): VideoInfoEntity {
-        return videoApi.getVideoInfo(keyword).toDomain()
+        val encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString())
+        return videoApi.getVideoInfo(encodedKeyword).toDomain()
     }
 }
