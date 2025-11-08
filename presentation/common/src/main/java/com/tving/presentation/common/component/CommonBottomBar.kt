@@ -24,18 +24,20 @@ fun CommonBottomBar(
     onNavigateToFavorite: () -> Unit = {}
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center
     ) {
         HorizontalDivider()
         Row(
-            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
         ) {
             Column(
-                modifier = Modifier.noRippleClickable { onNavigateToHome() }
+                modifier = Modifier
+                    .weight(1f)
+                    .noRippleClickable { onNavigateToHome() },
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                IconButton(onClick = {}) {
+                IconButton(onClick = onNavigateToHome) {
                     Icon(
                         imageVector = ImageVector.vectorResource(com.tving.designsystem.R.drawable.ic_arrow_back),
                         tint = Color.Unspecified,
@@ -46,9 +48,12 @@ fun CommonBottomBar(
             }
 
             Column(
-                modifier = Modifier.noRippleClickable { onNavigateToFavorite() }
+                modifier = Modifier
+                    .weight(1f)
+                    .noRippleClickable { onNavigateToFavorite() },
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                IconButton(onClick = {}) {
+                IconButton(onClick = onNavigateToFavorite) {
                     Icon(
                         imageVector = ImageVector.vectorResource(com.tving.designsystem.R.drawable.ic_arrow_back),
                         tint = Color.Unspecified,
