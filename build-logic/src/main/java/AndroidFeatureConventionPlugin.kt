@@ -15,6 +15,7 @@ internal class AndroidFeatureConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
+                implementation(project(":designsystem"))
                 implementation(project(":domain"))
                 implementation(project(":presentation:common"))
 
