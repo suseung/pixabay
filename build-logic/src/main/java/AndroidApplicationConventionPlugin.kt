@@ -3,6 +3,7 @@ import com.tving.convention.TvingConfig
 import com.tving.convention.configureAndroidCompose
 import com.tving.convention.configureKotlinAndroid
 import com.tving.convention.implementation
+import com.tving.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -57,6 +58,7 @@ internal class AndroidApplicationConventionPlugin : Plugin<Project> {
                 implementation(project(":designsystem"))
                 implementation(project(":data"))
                 implementation(project(":domain"))
+                implementation(libs.kotlinx.serialization.json)
             }
         }
     }

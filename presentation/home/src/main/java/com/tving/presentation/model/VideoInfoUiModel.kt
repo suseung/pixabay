@@ -1,22 +1,26 @@
 package com.tving.presentation.model
 
 import com.tving.domain.model.VideoInfoEntity
-import com.tving.presentation.common.model.UiModel
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class VideoInfoUiModel(
-    val url: String = "",
-    val type: String = "",
-    val views: Int = 0,
-    val downloads: Int = 0,
-    val likes: Int = 0,
-    val tags: List<String> = emptyList(),
-    val isLike: Boolean = false
-): UiModel
+    override val userName: String = "",
+    override val url: String = "",
+    override val itemType: String = "",
+    override val views: Int = 0,
+    override val downloads: Int = 0,
+    override val likes: Int = 0,
+    override val tags: List<String> = emptyList(),
+    override val isLike: Boolean = false,
+    override val isVideo: Boolean = true
+): PixaUiModel()
 
 fun VideoInfoEntity.toUiModel(): VideoInfoUiModel {
     return VideoInfoUiModel(
+        userName = userName,
         url = url,
-        type = type,
+        itemType = type,
         views = views,
         downloads = downloads,
         likes = likes,

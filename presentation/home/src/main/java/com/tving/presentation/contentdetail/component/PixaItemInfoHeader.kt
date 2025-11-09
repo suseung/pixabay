@@ -21,9 +21,9 @@ import androidx.compose.ui.unit.dp
 import com.tving.presentation.common.utils.ThemePreview
 
 @Composable
-fun ImageInfoHeader(
+fun PixaItemInfoHeader(
     modifier: Modifier = Modifier,
-    title: String,
+    userName: String,
     isLike: Boolean,
     onClickLike: () -> Unit = {}
 ) {
@@ -43,12 +43,12 @@ fun ImageInfoHeader(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = title.first().uppercase()
+                text = userName.first().uppercase()
             )
         }
         Text(
             modifier = Modifier.padding(start = 10.dp),
-            text = title
+            text = userName
         )
         Spacer(
             modifier = Modifier.weight(1f)
@@ -72,8 +72,8 @@ fun ImageInfoHeader(
 @ThemePreview
 @Composable
 private fun ImageInfoHeaderPreview() {
-    ImageInfoHeader(
-        title = "SLPix",
+    PixaItemInfoHeader(
+        userName = "SLPix",
         isLike = false
     )
 }

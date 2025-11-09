@@ -1,25 +1,39 @@
 package com.tving.presentation.model
 
 import com.tving.domain.model.ImageInfoEntity
+import kotlinx.serialization.Serializable
 
-data class ImageInfoUiModel(
-    val imageUrl: String = "",
-    val title: String = "",
-    val type: String = "",
-    val views: Int = 0,
-    val likes: Int = 0,
-    val downloads: Int = 0,
-    val tags: List<String> = emptyList(),
-    val isLike: Boolean = false
-) {
-    val tagsToString: String
-        get() = tags.joinToString(" • ")
+@Serializable
+sealed class PixaUiModel {
+    abstract val userName: String
+    abstract val url: String
+    abstract val itemType: String
+    abstract val views: Int
+    abstract val likes: Int
+    abstract val downloads: Int
+    abstract val tags: List<String>
+    abstract val isLike: Boolean
+    abstract val isVideo: Boolean
 }
+
+@Serializable
+data class ImageInfoUiModel(
+    override val userName: String = "",
+    override val url: String = "",
+    override val itemType: String = "",
+    override val views: Int = 0,
+    override val likes: Int = 0,
+    override val downloads: Int = 0,
+    override val tags: List<String> = emptyList(),
+    override val isLike: Boolean = false,
+    override val isVideo: Boolean = false
+): PixaUiModel()
 
 fun ImageInfoEntity.toUiModel(): ImageInfoUiModel {
     return ImageInfoUiModel(
-        imageUrl = url,
-        type = type,
+        userName = userName,
+        url = url,
+        itemType = type,
         views = views,
         downloads = downloads,
         likes = likes,
@@ -28,8 +42,8 @@ fun ImageInfoEntity.toUiModel(): ImageInfoUiModel {
 }
 
 val DEFAULT_IMAGE_INFO = ImageInfoUiModel(
-    title = "title",
-    type = "Photo",
+    userName = "user",
+    itemType = "Photo",
     views = 2781,
     likes = 9,
     downloads = 9,

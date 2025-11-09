@@ -1,4 +1,4 @@
-package com.tving.presentation.home.component
+package com.tving.presentation.component
 
 import androidx.annotation.OptIn
 import androidx.compose.runtime.Composable
@@ -20,7 +20,8 @@ import androidx.media3.ui.PlayerView
 @Composable
 fun VideoPlayer(
     modifier: Modifier = Modifier,
-    videoUri: String
+    videoUri: String,
+    onClick: () -> Unit = {}
 ) {
     val context = LocalContext.current
 
@@ -49,6 +50,7 @@ fun VideoPlayer(
             PlayerView(ctx).apply {
                 player = exoPlayer
                 resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL
+                setOnClickListener { onClick() }
             }
         },
         modifier = modifier

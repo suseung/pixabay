@@ -1,6 +1,7 @@
 package com.tving.domain.model
 
 data class ImageInfoEntity(
+    val userName: String,
     val url: String,
     val type: String,
     val views: Int,

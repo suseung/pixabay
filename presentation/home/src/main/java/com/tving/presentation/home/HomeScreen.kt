@@ -26,20 +26,30 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tving.designsystem.component.TvingScaffold
+import com.tving.presentation.common.base.CollectEffect
 import com.tving.presentation.common.component.CommonBottomBar
+import com.tving.presentation.common.ext.noRippleClickable
 import com.tving.presentation.home.component.ImageCard
-import com.tving.presentation.home.component.VideoPlayer
+import com.tving.presentation.component.VideoPlayer
 import com.tving.presentation.home.component.SearchBar
 import com.tving.presentation.model.ImageInfoUiModel
+import com.tving.presentation.model.PixaUiModel
 import com.tving.presentation.model.VideoInfoUiModel
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onNavigateToFavorite: () -> Unit = {}
+    onNavigateToFavorite: () -> Unit = {},
+    onNavigateToContentDetail: (PixaUiModel) -> Unit = {}
 ) {
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     val action by remember { mutableStateOf(viewModel::dispatch) }
+
+    CollectEffect(viewModel) { effect ->
+        when (effect) {
+            is HomeEffect.OnNavigateToContentDetail -> onNavigateToContentDetail(effect.item)
+        }
+    }
 
     TvingScaffold(
         titleContent = {
@@ -107,8 +117,11 @@ fun HomeContent(
                     VideoPlayer(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(300.dp),
-                        videoUri = videoInfo.url
+                            .aspectRatio(1f),
+                        videoUri = videoInfo.url,
+                        onClick = {
+                            action(HomeIntent.OnClickItem(videoInfo))
+                        }
                     )
                 }
             }
@@ -122,7 +135,10 @@ fun HomeContent(
                             ImageCard(
                                 modifier = Modifier
                                     .weight(1f)
-                                    .aspectRatio(1f),
+                                    .aspectRatio(1f)
+                                    .noRippleClickable {
+                                        action(HomeIntent.OnClickItem(item))
+                                    },
                                 imageInfo = item
                             )
                         }

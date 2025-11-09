@@ -7,6 +7,7 @@ import com.tving.domain.model.ImageInfoEntity
 import com.tving.domain.usecase.GetImageByKeywordUseCase
 import com.tving.domain.usecase.GetVideoByKeywordUseCase
 import com.tving.presentation.common.base.MVIViewModel
+import com.tving.presentation.model.PixaUiModel
 import com.tving.presentation.model.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -29,6 +30,7 @@ class HomeViewModel @Inject constructor(
         when (intent) {
             is HomeIntent.OnChangeInput -> processChangeInput(intent.input)
             is HomeIntent.OnClearInput -> processChangeInput("")
+            is HomeIntent.OnClickItem -> processClickItem(intent.pixaItemInfo)
         }
     }
 
@@ -59,7 +61,6 @@ class HomeViewModel @Inject constructor(
                         is ApiResult.Loading -> return@collect
                         is ApiResult.Success -> {
                             val (videoData, imageData) = apiResult.data
-                            print("here!!  videoData  ${videoData}  /  imageData  $imageData")
 
                             setState {
                                 copy(
@@ -69,11 +70,17 @@ class HomeViewModel @Inject constructor(
                             }
                         }
 
-                        is ApiResult.Error -> setToastEffect(
+                        is ApiResult.Error -> setToastEffect {
                             apiResult.exception.message ?: "error"
-                        )
+                        }
                     }
                 }
+        }
+    }
+
+    private fun processClickItem(pixaItemInfo: PixaUiModel) {
+        setEffect {
+            HomeEffect.OnNavigateToContentDetail(pixaItemInfo)
         }
     }
 }

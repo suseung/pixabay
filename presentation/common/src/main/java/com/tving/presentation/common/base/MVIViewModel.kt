@@ -73,15 +73,15 @@ abstract class MVIViewModel<I : ViewIntent, S : ViewState, E : ViewEffect> : Vie
 
     }
 
-    protected fun setEffect(effect: E) {
+    protected fun setEffect(builder: () -> E) {
         launch {
-            _effect.emit(effect)
+            _effect.emit(builder())
         }
     }
 
-    protected fun setToastEffect(message: String) {
+    protected fun setToastEffect(builder: () -> String) {
         launch {
-            _toastEffect.emit(message)
+            _toastEffect.emit(builder())
         }
     }
 
@@ -99,7 +99,7 @@ abstract class MVIViewModel<I : ViewIntent, S : ViewState, E : ViewEffect> : Vie
 
     protected open fun handleException(exception: Throwable) {
         exception.message?.let {
-            setToastEffect(it)
+            setToastEffect { it }
         }
     }
 }

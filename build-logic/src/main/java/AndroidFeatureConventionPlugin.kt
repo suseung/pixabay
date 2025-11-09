@@ -12,6 +12,7 @@ internal class AndroidFeatureConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("tving.android.library")
+                apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
             dependencies {
@@ -29,6 +30,7 @@ internal class AndroidFeatureConventionPlugin : Plugin<Project> {
                 debugImplementation(libs.bundles.androidx.ui.compose.debug)
                 implementation(platform(libs.androidx.compose.bom))
                 implementation(libs.androidx.viewModel.lifecycle)
+                implementation(libs.kotlinx.serialization.json)
             }
         }
     }

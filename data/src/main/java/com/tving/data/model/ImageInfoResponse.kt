@@ -11,6 +11,7 @@ internal data class ImageInfoResponse(
 
 @Serializable
 internal data class ImageHitResponse(
+    @SerialName("user") val userName: String,
     @SerialName("type") val type: String,
     @SerialName("webformatURL") val imagUrl: String,
     @SerialName("views") val views: Int,
@@ -21,6 +22,7 @@ internal data class ImageHitResponse(
 
 internal fun ImageHitResponse.toDomain(): ImageInfoEntity {
     return ImageInfoEntity(
+        userName = userName,
         url = imagUrl,
         type = type,
         views = views,

@@ -11,6 +11,7 @@ internal data class VideoInfoResponse(
 
 @Serializable
 internal data class VideoHitResponse(
+    @SerialName("user") val userName: String,
     @SerialName("type") val type: String,
     @SerialName("videos") val videos: VideoResponse,
     @SerialName("views") val views: Int,
@@ -33,6 +34,7 @@ internal data class VideoUrlInfoResponse(
 internal fun VideoInfoResponse.toDomain(): VideoInfoEntity {
     val item = hits.first()
     return VideoInfoEntity(
+        userName = item.userName,
         url = item.videos.smallUrlInfo.url,
         type = item.type,
         views = item.views,

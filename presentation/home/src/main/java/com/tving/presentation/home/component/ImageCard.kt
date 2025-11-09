@@ -26,7 +26,7 @@ fun ImageCard(
         contentAlignment = Alignment.TopEnd
     ) {
         AsyncImage(
-            model = imageInfo.imageUrl,
+            model = imageInfo.url,
             contentDescription = "image",
             contentScale = ContentScale.FillBounds,
         )
